@@ -1,7 +1,7 @@
 package example.controller;
 
 import de.felixroske.jfxsupport.FXMLController;
-import example.service.HomeService;
+import example.service.RegistrationService;
 import example.util.FXMLPage;
 import example.util.UIUtil;
 import javafx.event.ActionEvent;
@@ -17,13 +17,13 @@ import java.io.IOException;
  * @since November 19, 2017
  */
 @FXMLController
-public class HomeController {
+public class RegistrationController {
     @Autowired
-    private HomeService homeService;
+    private RegistrationService registrationService;
     @FXML
-    private Button registerButton;
+    private Button backButton;
 
-    public void goToRegistrationPage(ActionEvent event) throws IOException {
-        UIUtil.loadFXmlFile(registerButton.getParent(), FXMLPage.REGISTRATION_PAGE);
+    public void goToHomePage(ActionEvent event) throws IOException {
+        UIUtil.loadFXmlFile(backButton.getParent(), FXMLPage.HOME_PAGE);
     }
 }

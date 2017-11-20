@@ -8,7 +8,6 @@ import de.felixroske.jfxsupport.FXMLView;
  * @version 1.0
  * @since November 19, 2017
  */
-@FXMLView("HomeView.fxml")
-public class HomeView extends AbstractFxmlView {
-
+@FXMLView("RegistrationView.fxml")
+public class RegistrationView extends AbstractFxmlView {
 }
