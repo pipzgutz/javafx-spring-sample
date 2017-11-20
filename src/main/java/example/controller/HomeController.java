@@ -5,6 +5,7 @@ import example.service.HomeService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -20,6 +21,10 @@ public class HomeController {
     private TextField nameTextField;
 
     public void greet(ActionEvent event) {
-        System.out.println(homeService.greet(nameTextField.getText()));
+        String text = nameTextField.getText();
+
+        if (StringUtils.isNotBlank(text)) {
+            System.out.println(homeService.greet(text.trim()));
+        }
     }
 }
