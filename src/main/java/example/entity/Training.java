@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @since November 19, 2017
  */
 @Entity
-public class Course implements Serializable {
+public class Training implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -23,10 +23,10 @@ public class Course implements Serializable {
     @Column(name = "details")
     private String details;
 
-    public Course() {
+    public Training() {
     }
 
-    public Course(String name, String details) {
+    public Training(String name, String details) {
         this.name = name;
         this.details = details;
     }
@@ -58,13 +58,13 @@ public class Course implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Course)) return false;
+        if (!(o instanceof Training)) return false;
 
-        Course course = (Course) o;
+        Training training = (Training) o;
 
-        if (id != null ? !id.equals(course.id) : course.id != null) return false;
-        if (name != null ? !name.equals(course.name) : course.name != null) return false;
-        return details != null ? details.equals(course.details) : course.details == null;
+        if (id != null ? !id.equals(training.id) : training.id != null) return false;
+        if (name != null ? !name.equals(training.name) : training.name != null) return false;
+        return details != null ? details.equals(training.details) : training.details == null;
     }
 
     @Override
@@ -77,7 +77,7 @@ public class Course implements Serializable {
 
     @Override
     public String toString() {
-        return "Course{" +
+        return "Training{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", details='" + details + '\'' +

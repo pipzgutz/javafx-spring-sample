@@ -1,13 +1,13 @@
 package example;
 
 import de.felixroske.jfxsupport.AbstractJavaFxApplicationSupport;
-import example.view.HomeView;
+import example.view.RegistrationView;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Main extends AbstractJavaFxApplicationSupport {
+public class RegistrationApp extends AbstractJavaFxApplicationSupport {
 
 	public static void main(String[] args) {
-		launchApp(Main.class, HomeView.class, args);
+		launchApp(RegistrationApp.class, RegistrationView.class, args);
 	}
 }

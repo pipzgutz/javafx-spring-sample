@@ -1,37 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="example.controller.RegistrationController">
-   <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #F9F9F9;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="example.controller.RegistrationController">
+    <top>
+        <HBox prefHeight="112.0" prefWidth="800.0" spacing="20.0" style="-fx-background-color: #1E88E5;" BorderPane.alignment="CENTER">
          <children>
-            <Label text="First Name" />
-            <TextField fx:id="firstNameField" />
-            <Label text="Last Name" />
-            <TextField fx:id="lastNameField" />
-            <Label text="Organization (Company/School)" />
-            <TextField fx:id="organizationField" />
-            <Label text="Email Address" />
-            <TextField fx:id="emailAddressField" />
-            <Label text="Phone Number" />
-            <TextField fx:id="phoneNumberField" />
-            <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+            <Label text="Icon Here" textFill="WHITE" />
+            <VBox spacing="5.0">
                <children>
-                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#goToHomePage" text="Back" />
-                  <Button alignment="TOP_LEFT" mnemonicParsing="false" text="Submit" />
+                  <Label text="New York State" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label text="Request for Contact" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
                </children>
-            </HBox>
+            </VBox>
          </children>
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
-      </VBox>
-   </center>
+         </padding></HBox>
+    </top>
+    <center>
+        <VBox prefHeight="200.0" prefWidth="100.0" spacing="40.0" BorderPane.alignment="CENTER">
+            <children>
+                <JFXTextField fx:id="firstNameField" focusColor="#1976d2" labelFloat="true" promptText="First Name">
+               <font>
+                  <Font size="16.0" />
+               </font></JFXTextField>
+                <JFXTextField fx:id="lastNameField" focusColor="#1976d2" labelFloat="true" promptText="Last Name">
+               <font>
+                  <Font size="16.0" />
+               </font></JFXTextField>
+                <JFXTextField fx:id="organizationField" focusColor="#1976d2" labelFloat="true" promptText="Organization">
+               <font>
+                  <Font size="16.0" />
+               </font></JFXTextField>
+                <JFXTextField fx:id="emailAddressField" focusColor="#1976d2" labelFloat="true" promptText="Email Address">
+               <font>
+                  <Font size="16.0" />
+               </font></JFXTextField>
+                <JFXTextField fx:id="phoneNumberField" focusColor="#1976d2" labelFloat="true" promptText="Phone Number">
+               <font>
+                  <Font size="16.0" />
+               </font></JFXTextField>
+                <HBox alignment="CENTER" prefHeight="56.0" prefWidth="740.0" spacing="5.0">
+                    <children>
+                        <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" minHeight="40.0" minWidth="100.0" style="-fx-background-color: #1976D2;" text="NEXT" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></JFXButton>
+                    </children>
+                </HBox>
+            </children>
+            <padding>
+                <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+            </padding>
+        </VBox>
+    </center>
 </BorderPane>
