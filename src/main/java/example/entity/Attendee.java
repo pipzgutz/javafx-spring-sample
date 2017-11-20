@@ -1,10 +1,8 @@
 package example.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author Philip Mark Gutierrez <pgutierrez@owens.com>
@@ -29,15 +27,20 @@ public class Attendee implements Serializable {
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "courses_interested_in")
+    private List<Course> coursesInterestedIn;
+
     public Attendee() {
     }
 
-    public Attendee(String firstName, String lastName, String organization, String email, String phoneNumber) {
+    public Attendee(String firstName, String lastName, String organization, String email, String phoneNumber, List<Course> coursesInterestedIn) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.organization = organization;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.coursesInterestedIn = coursesInterestedIn;
     }
 
     public Long getId() {
@@ -88,6 +91,14 @@ public class Attendee implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
+    public List<Course> getCoursesInterestedIn() {
+        return coursesInterestedIn;
+    }
+
+    public void setCoursesInterestedIn(List<Course> coursesInterestedIn) {
+        this.coursesInterestedIn = coursesInterestedIn;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -101,7 +112,9 @@ public class Attendee implements Serializable {
         if (organization != null ? !organization.equals(attendee.organization) : attendee.organization != null)
             return false;
         if (email != null ? !email.equals(attendee.email) : attendee.email != null) return false;
-        return phoneNumber != null ? phoneNumber.equals(attendee.phoneNumber) : attendee.phoneNumber == null;
+        if (phoneNumber != null ? !phoneNumber.equals(attendee.phoneNumber) : attendee.phoneNumber != null)
+            return false;
+        return coursesInterestedIn != null ? coursesInterestedIn.equals(attendee.coursesInterestedIn) : attendee.coursesInterestedIn == null;
     }
 
     @Override
@@ -112,6 +125,7 @@ public class Attendee implements Serializable {
         result = 31 * result + (organization != null ? organization.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
+        result = 31 * result + (coursesInterestedIn != null ? coursesInterestedIn.hashCode() : 0);
         return result;
     }
 
@@ -124,6 +138,7 @@ public class Attendee implements Serializable {
                 ", organization='" + organization + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", coursesInterestedIn=" + coursesInterestedIn +
                 '}';
     }
 }
