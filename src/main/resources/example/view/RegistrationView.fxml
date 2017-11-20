@@ -4,13 +4,14 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="example.controller.RegistrationController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="example.controller.RegistrationController">
     <top>
         <HBox prefHeight="112.0" prefWidth="800.0" spacing="20.0" style="-fx-background-color: #0288D1;" BorderPane.alignment="CENTER">
          <children>
@@ -97,13 +98,86 @@
                   </JFXTextField>
                </children>
             </HBox>
-                <HBox alignment="CENTER" prefHeight="56.0" prefWidth="740.0" spacing="5.0">
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+               <children>
+                  <Label text="Technologies">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Label text="PHP">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <VBox prefHeight="200.0" prefWidth="94.0" spacing="10.0">
+                                 <children>
+                                    <CheckBox mnemonicParsing="false" text="PHP - Core" />
+                                    <CheckBox mnemonicParsing="false" text="PHP - Falcon" />
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Label text=".NET">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                                 <children>
+                                    <CheckBox mnemonicParsing="false" text=".NET - Core" />
+                                    <CheckBox mnemonicParsing="false" text=".NET - Full Stack" />
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Label text="Java">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                                 <children>
+                                    <CheckBox mnemonicParsing="false" text="Java - Core" />
+                                    <CheckBox mnemonicParsing="false" text="Java - Web" />
+                                    <CheckBox mnemonicParsing="false" text="Java - Spring" />
+                                    <CheckBox mnemonicParsing="false" text="Java - Full Stack" />
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+                <HBox alignment="CENTER" prefHeight="56.0" prefWidth="740.0">
                     <children>
                         <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" minHeight="40.0" minWidth="100.0" style="-fx-background-color: #0277BD;" text="SUBMIT" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
-                     </font></JFXButton>
+                     </font>
+                  </JFXButton>
                     </children>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
                 </HBox>
             </children>
             <padding>
