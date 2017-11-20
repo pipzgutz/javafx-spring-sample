@@ -3,8 +3,10 @@ package example.controller;
 import de.felixroske.jfxsupport.FXMLController;
 import example.entity.Attendee;
 import example.service.RegistrationService;
+import example.util.UIUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -37,6 +39,8 @@ public class RegistrationController {
         attendee.setEmail(emailAddressField.getText());
         attendee.setPhoneNumber(phoneNumberField.getText());
 
-        registrationService.save(attendee);
+        boolean isSuccessful = registrationService.save(attendee);
+
+        UIUtil.showAlert(Alert.AlertType.INFORMATION, "Information Dialog", "", "I have a great message for you!");
     }
 }

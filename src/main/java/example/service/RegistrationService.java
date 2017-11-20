@@ -16,7 +16,7 @@ public class RegistrationService {
     @Autowired
     private RegistrationDao registrationDao;
 
-    public void save(Attendee attendee) {
+    public boolean save(Attendee attendee) {
         String firstName = attendee.getFirstName();
         String lastName = attendee.getLastName();
 
@@ -26,6 +26,10 @@ public class RegistrationService {
             if (searchedAttendee == null) {
                 registrationDao.save(attendee);
             }
+
+            return true;
         }
+
+        return false;
     }
 }
