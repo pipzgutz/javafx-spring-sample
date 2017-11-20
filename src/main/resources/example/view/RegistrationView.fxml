@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
@@ -11,9 +12,9 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #F9F9F9;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="example.controller.RegistrationController">
     <top>
-        <HBox prefHeight="112.0" prefWidth="800.0" spacing="20.0" style="-fx-background-color: #1E88E5;" BorderPane.alignment="CENTER">
+        <HBox prefHeight="112.0" prefWidth="800.0" spacing="20.0" style="-fx-background-color: #0288D1;" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Icon Here" textFill="WHITE" />
+            <FontAwesomeIconView glyphName="LINUX" size="50" />
             <VBox spacing="5.0">
                <children>
                   <Label text="New York State" textFill="WHITE">
@@ -36,29 +37,73 @@
     <center>
         <VBox prefHeight="200.0" prefWidth="100.0" spacing="40.0" BorderPane.alignment="CENTER">
             <children>
-                <JFXTextField fx:id="firstNameField" focusColor="#1976d2" labelFloat="true" promptText="First Name">
-               <font>
-                  <Font size="16.0" />
-               </font></JFXTextField>
-                <JFXTextField fx:id="lastNameField" focusColor="#1976d2" labelFloat="true" promptText="Last Name">
-               <font>
-                  <Font size="16.0" />
-               </font></JFXTextField>
-                <JFXTextField fx:id="organizationField" focusColor="#1976d2" labelFloat="true" promptText="Organization">
-               <font>
-                  <Font size="16.0" />
-               </font></JFXTextField>
-                <JFXTextField fx:id="emailAddressField" focusColor="#1976d2" labelFloat="true" promptText="Email Address">
-               <font>
-                  <Font size="16.0" />
-               </font></JFXTextField>
-                <JFXTextField fx:id="phoneNumberField" focusColor="#1976d2" labelFloat="true" promptText="Phone Number">
-               <font>
-                  <Font size="16.0" />
-               </font></JFXTextField>
+            <HBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <FontAwesomeIconView glyphName="USER" size="25" />
+                            <JFXTextField fx:id="firstNameField" focusColor="#1976d2" labelFloat="true" promptText="First Name" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </HBox.margin>
+                        </JFXTextField>
+                            <JFXTextField fx:id="lastNameField" focusColor="#1976d2" labelFloat="true" promptText="Last Name" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </JFXTextField>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <FontAwesomeIconView glyphName="USERS" size="25" />
+                      <JFXTextField fx:id="organizationField" focusColor="#1976d2" labelFloat="true" promptText="Organization" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <FontAwesomeIconView glyphName="USERS" size="25" />
+                      <JFXTextField fx:id="emailAddressField" focusColor="#1976d2" labelFloat="true" promptText="Email Address" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <FontAwesomeIconView glyphName="PHONE" size="25" />
+                      <JFXTextField fx:id="phoneNumberField" focusColor="#1976d2" labelFloat="true" promptText="Phone Number" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+               </children>
+            </HBox>
                 <HBox alignment="CENTER" prefHeight="56.0" prefWidth="740.0" spacing="5.0">
                     <children>
-                        <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" minHeight="40.0" minWidth="100.0" style="-fx-background-color: #1976D2;" text="NEXT" textFill="WHITE">
+                        <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" minHeight="40.0" minWidth="100.0" style="-fx-background-color: #0277BD;" text="NEXT" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font></JFXButton>
