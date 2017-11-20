@@ -1,6 +1,9 @@
 package example.service;
 
+import example.dao.RegistrationDao;
 import example.entity.Attendee;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,7 +13,19 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class RegistrationService {
-    public void register(Attendee attendee) {
+    @Autowired
+    private RegistrationDao registrationDao;
 
+    public void save(Attendee attendee) {
+        String firstName = attendee.getFirstName();
+        String lastName = attendee.getLastName();
+
+        if (StringUtils.isNotBlank(firstName) && StringUtils.isNotBlank(lastName)) {
+            Attendee searchedAttendee = registrationDao.findFirstByFirstNameAndLastName(firstName.trim(), lastName.trim());
+
+            if (searchedAttendee == null) {
+                registrationDao.save(attendee);
+            }
+        }
     }
 }

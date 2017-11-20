@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="example.controller.RegistrationController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="example.controller.RegistrationController">
     <top>
         <HBox prefHeight="112.0" prefWidth="800.0" spacing="20.0" style="-fx-background-color: #0288D1;" BorderPane.alignment="CENTER">
          <children>
@@ -169,7 +169,7 @@
             </VBox>
                 <HBox alignment="CENTER" prefHeight="56.0" prefWidth="740.0">
                     <children>
-                        <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" minHeight="40.0" minWidth="100.0" style="-fx-background-color: #0277BD;" text="SUBMIT" textFill="WHITE">
+                        <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" minHeight="40.0" minWidth="100.0" onAction="#register" style="-fx-background-color: #0277BD;" text="SUBMIT" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
