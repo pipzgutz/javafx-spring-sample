@@ -1,6 +1,7 @@
-package example;
+package example.controller;
 
 import de.felixroske.jfxsupport.FXMLController;
+import example.service.HomeService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;

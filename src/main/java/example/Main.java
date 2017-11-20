@@ -1,6 +1,7 @@
 package example;
 
 import de.felixroske.jfxsupport.AbstractJavaFxApplicationSupport;
+import example.view.HomeView;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication

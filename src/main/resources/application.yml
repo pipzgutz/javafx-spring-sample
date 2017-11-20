@@ -1,2 +1,15 @@
+#spring:
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    properties:
+#      hibernate:
+#        default_schema:sample
+#  datasource:
+#    name: testdb
+#    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:file:~/jfxsampledb;DB_CLOSE_ON_EXIT=FALSE;IFEXISTS=TRUE;DB_CLOSE_DELAY=-1;AUTO_RECONNECT=TRUE;
+#    initialize: true
+
 javafx:
   title: JavaFX Spring Example
