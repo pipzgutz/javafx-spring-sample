@@ -6,7 +6,6 @@ package example.util;
  * @since November 19, 2017
  */
 public enum FXMLPage {
-    HOME_PAGE("HomeView.fxml"),
     REGISTRATION_PAGE("RegistrationView.fxml");
 
     private String filename;

@@ -2,6 +2,7 @@ package example.controller;
 
 import de.felixroske.jfxsupport.FXMLController;
 import example.entity.Attendee;
+import example.resp.Response;
 import example.service.RegistrationService;
 import example.util.UIUtil;
 import javafx.event.ActionEvent;
@@ -39,8 +40,12 @@ public class RegistrationController {
         attendee.setEmail(emailAddressField.getText());
         attendee.setPhoneNumber(phoneNumberField.getText());
 
-        boolean isSuccessful = registrationService.save(attendee);
+        Response response = registrationService.save(attendee);
 
-        UIUtil.showAlert(Alert.AlertType.INFORMATION, "Information Dialog", "", "I have a great message for you!");
+        if (response.isSuccessful()) {
+            UIUtil.showAlert(Alert.AlertType.INFORMATION, "Registration Successful", "", response.getMessage());
+        } else {
+            UIUtil.showAlert(Alert.AlertType.ERROR, "Registration Failed", "", response.getMessage());
+        }
     }
 }
