@@ -1,9 +1,8 @@
 package example.service;
 
 import example.entity.Attendee;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.xssf.usermodel.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +36,19 @@ public class ExportService {
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sheet = workbook.createSheet();
 
+        XSSFCellStyle headerCellStyle = createHeaderCellStyle(workbook);
+
         // Create the headers
         XSSFRow headerRow = sheet.createRow(0);
-        IntStream.range(0, headers.size()).forEach(i -> headerRow.createCell(i).setCellValue(headers.get(i)));
+        IntStream.range(0, headers.size()).forEach(i -> {
+            XSSFCell cell = headerRow.createCell(i);
+            cell.setCellValue(headers.get(i));
+            cell.setCellStyle(headerCellStyle);
+        });
 
         List<Attendee> attendees = registrationService.findAll();
+
+        XSSFCellStyle contentStyle = createContentStyle(workbook);
 
         IntStream.range(0, attendees.size()).forEach(i -> {
             // start at the 2nd row
@@ -50,19 +57,46 @@ public class ExportService {
             Attendee attendee = attendees.get(i);
 
             // enter the attendee details
-            attendeeRow.createCell(0).setCellValue(attendee.getFirstName());
-            attendeeRow.createCell(1).setCellValue(attendee.getLastName());
-            attendeeRow.createCell(2).setCellValue(attendee.getOrganization());
-            attendeeRow.createCell(3).setCellValue(attendee.getEmail());
-            attendeeRow.createCell(4).setCellValue(attendee.getPhoneNumber());
-            attendeeRow.createCell(5).setCellValue(attendee.getLookingFor());
-            attendeeRow.createCell(6).setCellValue(attendee.getTrainingsInterestedIn());
+            createContentCell(attendeeRow.createCell(0), attendee.getFirstName(), contentStyle);
+            createContentCell(attendeeRow.createCell(1), attendee.getLastName(), contentStyle);
+            createContentCell(attendeeRow.createCell(2), attendee.getOrganization(), contentStyle);
+            createContentCell(attendeeRow.createCell(3), attendee.getEmail(), contentStyle);
+            createContentCell(attendeeRow.createCell(4), attendee.getPhoneNumber(), contentStyle);
+            createContentCell(attendeeRow.createCell(5), attendee.getLookingFor(), contentStyle);
+            createContentCell(attendeeRow.createCell(6), attendee.getTrainingsInterestedIn(), contentStyle);
         });
 
         // auto size columns
         IntStream.range(0, headers.size()).forEach(sheet::autoSizeColumn);
 
         createExcelFile(workbook, file);
+    }
+
+    private void createContentCell(XSSFCell cell, String content, XSSFCellStyle style) {
+        cell.setCellValue(content);
+        cell.setCellStyle(style);
+    }
+
+    private XSSFCellStyle createHeaderCellStyle(XSSFWorkbook workbook) {
+        XSSFFont font = workbook.createFont();
+        font.setBold(true);
+        font.setFontHeightInPoints((short) 14);
+
+        XSSFCellStyle style = workbook.createCellStyle();
+        style.setFillBackgroundColor(IndexedColors.AQUA.getIndex());
+        style.setFont(font);
+
+        return style;
+    }
+
+    private XSSFCellStyle createContentStyle(XSSFWorkbook workbook) {
+        XSSFFont font = workbook.createFont();
+        font.setFontHeightInPoints((short) 12);
+
+        XSSFCellStyle style = workbook.createCellStyle();
+        style.setFont(font);
+
+        return style;
     }
 
     private void createExcelFile(XSSFWorkbook workbook, File file) {
