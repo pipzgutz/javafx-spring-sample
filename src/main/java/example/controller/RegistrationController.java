@@ -59,9 +59,7 @@ public class RegistrationController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        initTrainings(phpListView, phpTrainings, Arrays.asList("Core", "Falcon"));
-        initTrainings(dotNetListView, dotNetTrainings, Arrays.asList("Core", "Full Stack"));
-        initTrainings(javaListView, javaTrainings, Arrays.asList("Core", "Web", "Spring", "Full Stack"));
+        initAllTrainings();
 
         ContextMenu contextMenu = new ContextMenu();
         MenuItem exportToExcelMenuItem = new MenuItem("Export to Excel");
@@ -80,6 +78,12 @@ public class RegistrationController implements Initializable {
         });
         contextMenu.getItems().addAll(exportToExcelMenuItem);
         logo.setOnContextMenuRequested(event -> contextMenu.show(logo, event.getScreenX(), event.getScreenY()));
+    }
+
+    private void initAllTrainings() {
+        initTrainings(phpListView, phpTrainings, Arrays.asList("Core", "Falcon"));
+        initTrainings(dotNetListView, dotNetTrainings, Arrays.asList("Core", "Full Stack"));
+        initTrainings(javaListView, javaTrainings, Arrays.asList("Core", "Web", "Spring", "Full Stack"));
     }
 
     private void initTrainings(ListView<String> listView, Map<String, ObservableValue<Boolean>> trainings, List<String> contents) {
@@ -102,9 +106,30 @@ public class RegistrationController implements Initializable {
 
         if (response.isSuccessful()) {
             UIUtil.showAlert(Alert.AlertType.INFORMATION, "Registration Successful", "", response.getMessage());
+            clearAllFields();
         } else {
             UIUtil.showAlert(Alert.AlertType.ERROR, "Registration Failed", "", response.getMessage());
         }
+    }
+
+    private void clearAllFields() {
+        firstNameField.setText("");
+        lastNameField.setText("");
+        organizationField.setText("");
+        emailAddressField.setText("");
+        phoneNumberField.setText("");
+        lookingFor.getSelectionModel().clearSelection();
+
+        phpListView.getItems().clear();
+        dotNetListView.getItems().clear();
+        javaListView.getItems().clear();
+        initAllTrainings();
+    }
+
+    private void clearTraining(ListView<String> listView) {
+
+        MultipleSelectionModel<String> selectionModel = listView.getSelectionModel();
+        selectionModel.getSelectedIndices().forEach(selectionModel::clearSelection);
     }
 
     private void setTrainingsInterestedIn(Attendee attendee) {

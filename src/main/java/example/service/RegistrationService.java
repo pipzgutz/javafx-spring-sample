@@ -32,28 +32,34 @@ public class RegistrationService {
         String lookingFor = attendee.getLookingFor();
         String trainingsInterestedIn = attendee.getTrainingsInterestedIn();
 
-        if (StringUtils.isNotBlank(firstName) && StringUtils.isNotBlank(lastName)
-                && StringUtils.isNotBlank(organization) && StringUtils.isNotBlank(email) && StringUtils.isNotBlank(phoneNumber)
-                && StringUtils.isNotBlank(lookingFor) && StringUtils.isNotBlank(trainingsInterestedIn)) {
-            Attendee searchedAttendee = registrationDao.findFirstByFirstNameAndLastName(firstName.trim(), lastName.trim());
+        // validate the fields
+        boolean isBasicFieldsBlank = StringUtils.isBlank(firstName) || StringUtils.isBlank(lastName)
+                || StringUtils.isBlank(organization) || StringUtils.isBlank(email) || StringUtils.isBlank(phoneNumber);
 
-            if (searchedAttendee == null) {
-                registrationDao.save(attendee);
-            } else {
-                return new Response("That name has already been registered, kindly ask for assistance to edit that entry", false);
+        if (isBasicFieldsBlank || StringUtils.isBlank(lookingFor)
+                || StringUtils.isBlank(trainingsInterestedIn)) {
+
+            String message = "Kindly fill up all fields.";
+
+            if (!isBasicFieldsBlank) {
+                if (StringUtils.isBlank(lookingFor)) {
+                    message = "Kindly tell us, what are you looking for?";
+                } else if (StringUtils.isBlank(trainingsInterestedIn)) {
+                    message = "Kindly select at least one training you are interested in.";
+                }
             }
 
-            return new Response("Thank you for registering! Please, enjoy the event", true);
+            return new Response(message, false);
         }
 
-        String message = "Kindly fillup all fields";
+        Attendee searchedAttendee = registrationDao.findFirstByFirstNameAndLastName(firstName.trim(), lastName.trim());
 
-        if (StringUtils.isBlank(lookingFor)) {
-            message = "We are interested on what you are looking for";
-        } else if (StringUtils.isBlank(trainingsInterestedIn)) {
-            message = "Select at least one training you are interested in";
+        if (searchedAttendee == null) {
+            registrationDao.save(attendee);
+        } else {
+            return new Response("That name has already been registered, kindly ask for assistance to edit that entry", false);
         }
 
-        return new Response(message, false);
+        return new Response("Thank you for registering! Please, enjoy the event", true);
     }
 }
