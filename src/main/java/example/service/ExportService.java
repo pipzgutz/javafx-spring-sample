@@ -59,6 +59,9 @@ public class ExportService {
             attendeeRow.createCell(6).setCellValue(attendee.getTrainingsInterestedIn());
         });
 
+        // auto size columns
+        IntStream.range(0, headers.size()).forEach(sheet::autoSizeColumn);
+
         createExcelFile(workbook, file);
     }
 
