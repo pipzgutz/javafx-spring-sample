@@ -26,6 +26,8 @@ public class Attendee implements Serializable {
     private String email;
     @Column(name = "phone_number")
     private String phoneNumber;
+    @Column(name = "looking_for")
+    private String lookingFor;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "trainings_interested_in")
@@ -34,12 +36,13 @@ public class Attendee implements Serializable {
     public Attendee() {
     }
 
-    public Attendee(String firstName, String lastName, String organization, String email, String phoneNumber, List<Training> trainingsInterestedIn) {
+    public Attendee(String firstName, String lastName, String organization, String email, String phoneNumber, String lookingFor, List<Training> trainingsInterestedIn) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.organization = organization;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.lookingFor = lookingFor;
         this.trainingsInterestedIn = trainingsInterestedIn;
     }
 
@@ -91,6 +94,14 @@ public class Attendee implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getLookingFor() {
+        return lookingFor;
+    }
+
+    public void setLookingFor(String lookingFor) {
+        this.lookingFor = lookingFor;
+    }
+
     public List<Training> getTrainingsInterestedIn() {
         return trainingsInterestedIn;
     }
@@ -114,6 +125,7 @@ public class Attendee implements Serializable {
         if (email != null ? !email.equals(attendee.email) : attendee.email != null) return false;
         if (phoneNumber != null ? !phoneNumber.equals(attendee.phoneNumber) : attendee.phoneNumber != null)
             return false;
+        if (lookingFor != null ? !lookingFor.equals(attendee.lookingFor) : attendee.lookingFor != null) return false;
         return trainingsInterestedIn != null ? trainingsInterestedIn.equals(attendee.trainingsInterestedIn) : attendee.trainingsInterestedIn == null;
     }
 
@@ -125,6 +137,7 @@ public class Attendee implements Serializable {
         result = 31 * result + (organization != null ? organization.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
+        result = 31 * result + (lookingFor != null ? lookingFor.hashCode() : 0);
         result = 31 * result + (trainingsInterestedIn != null ? trainingsInterestedIn.hashCode() : 0);
         return result;
     }
@@ -138,6 +151,7 @@ public class Attendee implements Serializable {
                 ", organization='" + organization + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", lookingFor='" + lookingFor + '\'' +
                 ", trainingsInterestedIn=" + trainingsInterestedIn +
                 '}';
     }

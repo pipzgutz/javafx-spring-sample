@@ -8,6 +8,7 @@ import example.util.UIUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -31,6 +32,8 @@ public class RegistrationController {
     private TextField emailAddressField;
     @FXML
     private TextField phoneNumberField;
+    @FXML
+    private ComboBox lookingFor;
 
     public void register(ActionEvent event) {
         Attendee attendee = new Attendee();
@@ -39,6 +42,7 @@ public class RegistrationController {
         attendee.setOrganization(organizationField.getText());
         attendee.setEmail(emailAddressField.getText());
         attendee.setPhoneNumber(phoneNumberField.getText());
+        attendee.setLookingFor((String) lookingFor.getValue());
 
         Response response = registrationService.save(attendee);
 

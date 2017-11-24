@@ -23,9 +23,11 @@ public class RegistrationService {
         String organization = attendee.getOrganization();
         String email = attendee.getEmail();
         String phoneNumber = attendee.getPhoneNumber();
+        String lookingFor = attendee.getLookingFor();
 
         if (StringUtils.isNotBlank(firstName) && StringUtils.isNotBlank(lastName)
-                && StringUtils.isNotBlank(organization) && StringUtils.isNotBlank(email) && StringUtils.isNotBlank(phoneNumber)) {
+                && StringUtils.isNotBlank(organization) && StringUtils.isNotBlank(email) && StringUtils.isNotBlank(phoneNumber)
+                && StringUtils.isNotBlank(lookingFor)) {
             Attendee searchedAttendee = registrationDao.findFirstByFirstNameAndLastName(firstName.trim(), lastName.trim());
 
             if (searchedAttendee == null) {

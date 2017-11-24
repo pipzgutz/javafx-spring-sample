@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
@@ -96,6 +99,29 @@
                         <Insets left="10.0" />
                      </HBox.margin>
                   </JFXTextField>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label nodeOrientation="LEFT_TO_RIGHT" text="What are you looking for?">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </Label>
+                  <JFXComboBox fx:id="lookingFor" promptText="I'm looking for ...">
+                      <items>
+                          <FXCollections fx:factory="observableArrayList">
+                              <String fx:value="I'm a student looking for an OJT." />
+                              <String fx:value="I'm a fresh grad looking for a Job." />
+                              <String fx:value="I'm already working and is looking for new opportunties." />
+                              <String fx:value="I don't have work right now and is currently looking for new opportunities." />
+                              <String fx:value="I'm here to enjoy the event." />
+                          </FXCollections>
+                      </items>
+                  </JFXComboBox>
                </children>
             </HBox>
             <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0">
