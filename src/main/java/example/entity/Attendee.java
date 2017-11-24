@@ -1,8 +1,10 @@
 package example.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * @author Philip Mark Gutierrez <pgutierrez@owens.com>
@@ -29,14 +31,13 @@ public class Attendee implements Serializable {
     @Column(name = "looking_for")
     private String lookingFor;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "trainings_interested_in")
-    private List<Training> trainingsInterestedIn;
+    @Column(name = "trainings_interested_in")
+    private String trainingsInterestedIn;
 
     public Attendee() {
     }
 
-    public Attendee(String firstName, String lastName, String organization, String email, String phoneNumber, String lookingFor, List<Training> trainingsInterestedIn) {
+    public Attendee(String firstName, String lastName, String organization, String email, String phoneNumber, String lookingFor, String trainingsInterestedIn) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.organization = organization;
@@ -102,11 +103,11 @@ public class Attendee implements Serializable {
         this.lookingFor = lookingFor;
     }
 
-    public List<Training> getTrainingsInterestedIn() {
+    public String getTrainingsInterestedIn() {
         return trainingsInterestedIn;
     }
 
-    public void setTrainingsInterestedIn(List<Training> trainingsInterestedIn) {
+    public void setTrainingsInterestedIn(String trainingsInterestedIn) {
         this.trainingsInterestedIn = trainingsInterestedIn;
     }
 
@@ -152,7 +153,7 @@ public class Attendee implements Serializable {
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", lookingFor='" + lookingFor + '\'' +
-                ", trainingsInterestedIn=" + trainingsInterestedIn +
+                ", trainingsInterestedIn='" + trainingsInterestedIn + '\'' +
                 '}';
     }
 }

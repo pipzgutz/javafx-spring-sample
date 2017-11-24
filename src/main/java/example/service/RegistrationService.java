@@ -24,10 +24,11 @@ public class RegistrationService {
         String email = attendee.getEmail();
         String phoneNumber = attendee.getPhoneNumber();
         String lookingFor = attendee.getLookingFor();
+        String trainingsInterestedIn = attendee.getTrainingsInterestedIn();
 
         if (StringUtils.isNotBlank(firstName) && StringUtils.isNotBlank(lastName)
                 && StringUtils.isNotBlank(organization) && StringUtils.isNotBlank(email) && StringUtils.isNotBlank(phoneNumber)
-                && StringUtils.isNotBlank(lookingFor)) {
+                && StringUtils.isNotBlank(lookingFor) && StringUtils.isNotBlank(trainingsInterestedIn)) {
             Attendee searchedAttendee = registrationDao.findFirstByFirstNameAndLastName(firstName.trim(), lastName.trim());
 
             if (searchedAttendee == null) {
@@ -36,9 +37,17 @@ public class RegistrationService {
                 return new Response("That name has already been registered, kindly ask for assistance to edit that entry", false);
             }
 
-            return new Response("Thank you for registering!", true);
+            return new Response("Thank you for registering! Please, enjoy the event", true);
         }
 
-        return new Response("Kindly fillup all fields", false);
+        String message = "Kindly fillup all fields";
+
+        if (StringUtils.isBlank(lookingFor)) {
+            message = "We are interested on what you are looking for";
+        } else if (StringUtils.isBlank(trainingsInterestedIn)) {
+            message = "Select at least one training you are interested in";
+        }
+
+        return new Response(message, false);
     }
 }

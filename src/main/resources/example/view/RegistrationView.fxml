@@ -2,12 +2,12 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -21,12 +21,12 @@
             <FontAwesomeIconView glyphName="LINUX" size="50" />
             <VBox spacing="5.0">
                <children>
-                  <Label text="New York State" textFill="WHITE">
+                  <Label text="Acme Inc" textFill="WHITE">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label text="Request for Contact" textFill="WHITE">
+                  <Label text="Registration Form" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
@@ -124,14 +124,14 @@
                   </JFXComboBox>
                </children>
             </HBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+            <VBox prefHeight="400.0" prefWidth="964.0" spacing="20.0">
                <children>
-                  <Label text="Technologies">
+                  <Label text="What trainings are you interested in?">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox prefHeight="162.0" prefWidth="964.0">
                      <children>
                         <VBox prefHeight="200.0" prefWidth="200.0" spacing="10.0">
                            <children>
@@ -142,8 +142,7 @@
                               </Label>
                               <VBox prefHeight="200.0" prefWidth="94.0" spacing="10.0">
                                  <children>
-                                    <CheckBox mnemonicParsing="false" text="PHP - Core" />
-                                    <CheckBox mnemonicParsing="false" text="PHP - Falcon" />
+                                    <JFXListView fx:id="phpListView" VBox.vgrow="ALWAYS" />
                                  </children>
                               </VBox>
                            </children>
@@ -160,8 +159,7 @@
                               </Label>
                               <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                                  <children>
-                                    <CheckBox mnemonicParsing="false" text=".NET - Core" />
-                                    <CheckBox mnemonicParsing="false" text=".NET - Full Stack" />
+                                    <JFXListView fx:id="dotNetListView" VBox.vgrow="ALWAYS" />
                                  </children>
                               </VBox>
                            </children>
@@ -178,10 +176,7 @@
                               </Label>
                               <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                                  <children>
-                                    <CheckBox mnemonicParsing="false" text="Java - Core" />
-                                    <CheckBox mnemonicParsing="false" text="Java - Web" />
-                                    <CheckBox mnemonicParsing="false" text="Java - Spring" />
-                                    <CheckBox mnemonicParsing="false" text="Java - Full Stack" />
+                                    <JFXListView fx:id="javaListView" VBox.vgrow="ALWAYS" />
                                  </children>
                               </VBox>
                            </children>
