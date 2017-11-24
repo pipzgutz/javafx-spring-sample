@@ -7,6 +7,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author Philip Mark Gutierrez <pgutierrez@owens.com>
  * @version 1.0
@@ -16,6 +18,10 @@ import org.springframework.stereotype.Service;
 public class RegistrationService {
     @Autowired
     private RegistrationDao registrationDao;
+
+    public List<Attendee> findAll() {
+        return registrationDao.findAll();
+    }
 
     public Response save(Attendee attendee) {
         String firstName = attendee.getFirstName();

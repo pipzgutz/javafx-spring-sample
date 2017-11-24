@@ -1,8 +1,10 @@
 package example.controller;
 
 import de.felixroske.jfxsupport.FXMLController;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import example.entity.Attendee;
 import example.resp.Response;
+import example.service.ExportService;
 import example.service.RegistrationService;
 import example.util.UIUtil;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -10,13 +12,12 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxListCell;
+import javafx.stage.FileChooser;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.File;
 import java.net.URL;
 import java.util.*;
 
@@ -29,7 +30,11 @@ import java.util.*;
 public class RegistrationController implements Initializable {
     @Autowired
     private RegistrationService registrationService;
+    @Autowired
+    private ExportService exportService;
 
+    @FXML
+    private FontAwesomeIconView logo;
     @FXML
     private TextField firstNameField;
     @FXML
@@ -57,6 +62,24 @@ public class RegistrationController implements Initializable {
         initTrainings(phpListView, phpTrainings, Arrays.asList("Core", "Falcon"));
         initTrainings(dotNetListView, dotNetTrainings, Arrays.asList("Core", "Full Stack"));
         initTrainings(javaListView, javaTrainings, Arrays.asList("Core", "Web", "Spring", "Full Stack"));
+
+        ContextMenu contextMenu = new ContextMenu();
+        MenuItem exportToExcelMenuItem = new MenuItem("Export to Excel");
+        exportToExcelMenuItem.setOnAction(event -> {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Save Registrations");
+            String initialFilePath = System.getProperty("user.home") + File.separator + "Desktop";
+            fileChooser.setInitialDirectory(new File(initialFilePath));
+            fileChooser.setInitialFileName("event-registration.xlsx");
+
+            File file = fileChooser.showSaveDialog(logo.getScene().getWindow());
+
+            if (file != null) {
+                exportService.exportToExcel(file);
+            }
+        });
+        contextMenu.getItems().addAll(exportToExcelMenuItem);
+        logo.setOnContextMenuRequested(event -> contextMenu.show(logo, event.getScreenX(), event.getScreenY()));
     }
 
     private void initTrainings(ListView<String> listView, Map<String, ObservableValue<Boolean>> trainings, List<String> contents) {
