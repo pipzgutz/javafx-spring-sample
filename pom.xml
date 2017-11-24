@@ -27,9 +27,16 @@
         <fontawesomefx.version>8.9</fontawesomefx.version>
         <jfoenix.version>1.10.0</jfoenix.version>
         <poi.version>3.17</poi.version>
+        <commons-validator.version>1.6</commons-validator.version>
     </properties>
 
 	<dependencies>
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>${commons-validator.version}</version>
+        </dependency>
+
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>

@@ -11,6 +11,7 @@ import example.resp.Response;
 import example.service.ExportService;
 import example.service.RegistrationService;
 import example.util.UIUtil;
+import example.validator.EmailFieldValidator;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -119,6 +120,7 @@ public class RegistrationController implements Initializable {
         addRequiredValidator(lastNameField);
         addRequiredValidator(organizationField);
         addRequiredValidator(emailAddressField);
+        addEmailValidator(emailAddressField);
         addRequiredValidator(phoneNumberField);
 
         ContextMenu contextMenu = new ContextMenu();
@@ -142,11 +144,21 @@ public class RegistrationController implements Initializable {
         firstNameField.requestFocus();
     }
 
+    private void addEmailValidator(JFXTextField textField) {
+        EmailFieldValidator emailFieldValidator = new EmailFieldValidator();
+        textField.getValidators().add(emailFieldValidator);
+        textField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                textField.validate();
+            }
+        });
+    }
+
     private void addRequiredValidator(JFXTextField textField) {
         RequiredFieldValidator requiredFieldValidator = new RequiredFieldValidator();
         requiredFieldValidator.setMessage("Field is required");
 
-        textField.getValidators().addAll(requiredFieldValidator);
+        textField.getValidators().add(requiredFieldValidator);
         textField.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue) {
                 textField.validate();
