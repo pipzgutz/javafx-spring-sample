@@ -1,5 +1,9 @@
 package example.controller;
 
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.RequiredFieldValidator;
 import de.felixroske.jfxsupport.FXMLController;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import example.entity.Attendee;
@@ -36,28 +40,31 @@ public class RegistrationController implements Initializable {
     @FXML
     private FontAwesomeIconView logo;
     @FXML
-    private TextField firstNameField;
+    private JFXTextField firstNameField;
     @FXML
-    private TextField lastNameField;
+    private JFXTextField lastNameField;
     @FXML
-    private TextField organizationField;
+    private JFXTextField organizationField;
     @FXML
-    private TextField emailAddressField;
+    private JFXTextField emailAddressField;
     @FXML
-    private TextField phoneNumberField;
+    private JFXTextField phoneNumberField;
     @FXML
-    private ComboBox lookingFor;
+    private JFXComboBox lookingFor;
     @FXML
-    private ListView<String> phpListView;
+    private JFXListView<String> phpListView;
     private Map<String, ObservableValue<Boolean>> phpTrainings = new HashMap<>();
     @FXML
-    private ListView<String> dotNetListView;
+    private JFXListView<String> dotNetListView;
     private Map<String, ObservableValue<Boolean>> dotNetTrainings = new HashMap<>();
     @FXML
-    private ListView<String> javaListView;
+    private JFXListView<String> javaListView;
     private Map<String, ObservableValue<Boolean>> javaTrainings = new HashMap<>();
 
     public void register(ActionEvent event) {
+        // validate the fields
+        validateFields();
+
         Attendee attendee = new Attendee();
         attendee.setFirstName(firstNameField.getText());
         attendee.setLastName(lastNameField.getText());
@@ -75,6 +82,14 @@ public class RegistrationController implements Initializable {
         } else {
             UIUtil.showAlert(Alert.AlertType.ERROR, "Registration Failed", "", response.getMessage());
         }
+    }
+
+    private void validateFields() {
+        firstNameField.validate();
+        lastNameField.validate();
+        organizationField.validate();
+        emailAddressField.validate();
+        phoneNumberField.validate();
     }
 
     public void clearAllFields() {
@@ -97,6 +112,12 @@ public class RegistrationController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         initAllTrainings();
 
+        addRequiredValidator(firstNameField);
+        addRequiredValidator(lastNameField);
+        addRequiredValidator(organizationField);
+        addRequiredValidator(emailAddressField);
+        addRequiredValidator(phoneNumberField);
+
         ContextMenu contextMenu = new ContextMenu();
         MenuItem exportToExcelMenuItem = new MenuItem("Export to Excel");
         exportToExcelMenuItem.setOnAction(event -> {
@@ -114,6 +135,20 @@ public class RegistrationController implements Initializable {
         });
         contextMenu.getItems().addAll(exportToExcelMenuItem);
         logo.setOnContextMenuRequested(event -> contextMenu.show(logo, event.getScreenX(), event.getScreenY()));
+
+        firstNameField.requestFocus();
+    }
+
+    private void addRequiredValidator(JFXTextField textField) {
+        RequiredFieldValidator requiredFieldValidator = new RequiredFieldValidator();
+        requiredFieldValidator.setMessage("Field is required");
+
+        textField.getValidators().addAll(requiredFieldValidator);
+        textField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                textField.validate();
+            }
+        });
     }
 
     private void initAllTrainings() {
@@ -126,12 +161,6 @@ public class RegistrationController implements Initializable {
         contents.forEach(content -> trainings.put(content, new SimpleBooleanProperty(false)));
         listView.getItems().addAll(trainings.keySet());
         listView.setCellFactory(CheckBoxListCell.forListView(trainings::get));
-    }
-
-    private void clearTraining(ListView<String> listView) {
-
-        MultipleSelectionModel<String> selectionModel = listView.getSelectionModel();
-        selectionModel.getSelectedIndices().forEach(selectionModel::clearSelection);
     }
 
     private void setTrainingsInterestedIn(Attendee attendee) {
