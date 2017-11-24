@@ -57,6 +57,42 @@ public class RegistrationController implements Initializable {
     private ListView<String> javaListView;
     private Map<String, ObservableValue<Boolean>> javaTrainings = new HashMap<>();
 
+    public void register(ActionEvent event) {
+        Attendee attendee = new Attendee();
+        attendee.setFirstName(firstNameField.getText());
+        attendee.setLastName(lastNameField.getText());
+        attendee.setOrganization(organizationField.getText());
+        attendee.setEmail(emailAddressField.getText());
+        attendee.setPhoneNumber(phoneNumberField.getText());
+        attendee.setLookingFor((String) lookingFor.getValue());
+        setTrainingsInterestedIn(attendee);
+
+        Response response = registrationService.save(attendee);
+
+        if (response.isSuccessful()) {
+            UIUtil.showAlert(Alert.AlertType.INFORMATION, "Registration Successful", "", response.getMessage());
+            clearAllFields();
+        } else {
+            UIUtil.showAlert(Alert.AlertType.ERROR, "Registration Failed", "", response.getMessage());
+        }
+    }
+
+    public void clearAllFields() {
+        firstNameField.setText("");
+        lastNameField.setText("");
+        organizationField.setText("");
+        emailAddressField.setText("");
+        phoneNumberField.setText("");
+        lookingFor.getSelectionModel().clearSelection();
+
+        phpListView.getItems().clear();
+        dotNetListView.getItems().clear();
+        javaListView.getItems().clear();
+        initAllTrainings();
+
+        firstNameField.requestFocus();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initAllTrainings();
@@ -90,40 +126,6 @@ public class RegistrationController implements Initializable {
         contents.forEach(content -> trainings.put(content, new SimpleBooleanProperty(false)));
         listView.getItems().addAll(trainings.keySet());
         listView.setCellFactory(CheckBoxListCell.forListView(trainings::get));
-    }
-
-    public void register(ActionEvent event) {
-        Attendee attendee = new Attendee();
-        attendee.setFirstName(firstNameField.getText());
-        attendee.setLastName(lastNameField.getText());
-        attendee.setOrganization(organizationField.getText());
-        attendee.setEmail(emailAddressField.getText());
-        attendee.setPhoneNumber(phoneNumberField.getText());
-        attendee.setLookingFor((String) lookingFor.getValue());
-        setTrainingsInterestedIn(attendee);
-
-        Response response = registrationService.save(attendee);
-
-        if (response.isSuccessful()) {
-            UIUtil.showAlert(Alert.AlertType.INFORMATION, "Registration Successful", "", response.getMessage());
-            clearAllFields();
-        } else {
-            UIUtil.showAlert(Alert.AlertType.ERROR, "Registration Failed", "", response.getMessage());
-        }
-    }
-
-    private void clearAllFields() {
-        firstNameField.setText("");
-        lastNameField.setText("");
-        organizationField.setText("");
-        emailAddressField.setText("");
-        phoneNumberField.setText("");
-        lookingFor.getSelectionModel().clearSelection();
-
-        phpListView.getItems().clear();
-        dotNetListView.getItems().clear();
-        javaListView.getItems().clear();
-        initAllTrainings();
     }
 
     private void clearTraining(ListView<String> listView) {
